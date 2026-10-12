@@ -11,19 +11,19 @@
 <style>
 /* Layout: form column on the left, live A4 preview on the right (stacks under the form on phones); sticky download bar at the bottom. */
 :root{
-  --bg:#f2f4f8; --surface:#ffffff; --line:#d5dbe6; --ink:#141c2b; --muted:#5c6779;
-  --accent:#27467f; --accent-ink:#ffffff; --accent-soft:#e3e9f4; --bad:#b3261e; --good:#1f7a43;
-  --inv-blue:#27467f; --inv-grey:#676767; --inv-col:#f2f2f2; --inv-paper:#ffffff; --inv-ink:#111111;
+  --bg:#f1f5f4; --surface:#ffffff; --line:#d3dedc; --ink:#152225; --muted:#5a6b6e;
+  --accent:#10393b; --accent-ink:#ffffff; --accent-soft:#e2eeec; --bad:#b3261e; --good:#1f7a43; --gold:#a97f2a;
+  --inv-dark:#10393b; --inv-gold:#c9a048; --inv-tint:#ecf3f2;
   --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Roboto,sans-serif;
   --r:10px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0e131c; --surface:#171e2a; --line:#2b3546; --ink:#e5eaf2; --muted:#9aa5b8;
-  --accent:#8fb0ec; --accent-ink:#0b1630; --accent-soft:#1d2b47; --bad:#ff8a80; --good:#5fcf8a; color-scheme:dark}}
+  --bg:#0c1516; --surface:#152123; --line:#29393b; --ink:#e3eeec; --muted:#97aaa8;
+  --accent:#6fc7b8; --accent-ink:#06201d; --accent-soft:#183a37; --bad:#ff8a80; --good:#5fcf8a; --gold:#d9b25e; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e131c; --surface:#171e2a; --line:#2b3546; --ink:#e5eaf2; --muted:#9aa5b8;
-  --accent:#8fb0ec; --accent-ink:#0b1630; --accent-soft:#1d2b47; --bad:#ff8a80; --good:#5fcf8a; color-scheme:dark}
+  --bg:#0c1516; --surface:#152123; --line:#29393b; --ink:#e3eeec; --muted:#97aaa8;
+  --accent:#6fc7b8; --accent-ink:#06201d; --accent-soft:#183a37; --bad:#ff8a80; --good:#5fcf8a; --gold:#d9b25e; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 120px;display:grid;gap:20px}
@@ -33,7 +33,7 @@ h1{font-size:1.75rem;font-weight:800}
 h2{font-size:1.08rem;font-weight:700}
 p{margin:0}
 .lede{color:var(--muted);max-width:62ch}
-.eyebrow{font-family:var(--f-display);font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.eyebrow{font-family:var(--f-display);font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold)}
 .cols{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
 @media (min-width:980px){.cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.previewCol{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}}
 .form{display:grid;gap:16px;min-width:0}
@@ -69,30 +69,37 @@ button:disabled{opacity:.55;cursor:default}
 
 /* invoice preview (A4, scales with its column) */
 .previewCol{display:grid;gap:8px;min-width:0}
-.sheet{container-type:inline-size;width:100%;max-width:100%;aspect-ratio:210/297;background:var(--inv-paper);color:var(--inv-ink);box-shadow:0 1px 3px rgba(0,0,0,.18),0 8px 24px rgba(0,0,0,.08);border-radius:4px;position:relative;overflow:hidden;font-family:Arial,Helvetica,sans-serif}
-.sheet .band{position:absolute;left:7.6cqw;right:7.6cqw;top:7.6cqw;height:21.4cqw;background:var(--inv-blue);color:#fff}
-.sheet .band .t{position:absolute;left:4.8cqw;bottom:4.4cqw;font-size:7.06cqw;line-height:1}
-.sheet .band .sup{position:absolute;right:4.8cqw;top:4.2cqw;text-align:right;font-size:1.85cqw;line-height:1.3;max-width:46cqw}
-.sheet .band .sup b{font-size:2.52cqw;display:block;margin-bottom:.3cqw}
-.sheet .meta{position:absolute;left:12.4cqw;right:12.4cqw;top:32.6cqw;display:flex;justify-content:space-between;gap:4cqw}
-.sheet .lbl{font-weight:700;font-size:1.51cqw}
-.sheet .bill b{display:block;font-size:2.52cqw;margin:1.4cqw 0 .9cqw}
-.sheet .bill div{font-size:1.85cqw;line-height:1.62}
-.sheet .right{text-align:right;display:grid;gap:.8cqw;font-size:1.93cqw}
-.sheet .right .v{margin-bottom:1.6cqw}
-.sheet table{position:absolute;left:12.4cqw;right:12.4cqw;top:57.2cqw;width:75.2cqw;border-collapse:collapse;font-size:1.85cqw}
-.sheet th{font-size:1.51cqw;text-align:left;padding:0 0 1cqw;border-bottom:.17cqw solid #111}
-.sheet td{padding:1.7cqw 0;vertical-align:top;border-bottom:.1cqw solid #dedede;line-height:1.4}
-.sheet tr:last-child td{border-bottom:0}
-.sheet td:first-child{color:#606060;width:9.5cqw}
+.sheet{container-type:inline-size;width:100%;max-width:100%;aspect-ratio:210/297;background:#fff;color:#182024;box-shadow:0 1px 3px rgba(0,0,0,.18),0 8px 24px rgba(0,0,0,.08);border-radius:4px;position:relative;overflow:hidden;font-family:Arial,Helvetica,sans-serif}
+.sheet .lbl{font-weight:700;font-size:1.43cqw;color:var(--inv-dark);letter-spacing:.02em}
+.sheet .band{position:absolute;left:7.62cqw;right:7.62cqw;top:7.62cqw;height:20cqw;background:var(--inv-dark);color:#fff}
+.sheet .band .tt{position:absolute;left:3.81cqw;top:6.2cqw}
+.sheet .band .t{font-size:6.72cqw;line-height:1}
+.sheet .band .no{color:var(--inv-gold);font-weight:700;font-size:1.68cqw;margin-top:1.6cqw}
+.sheet .band .sup{position:absolute;right:3.81cqw;top:3.9cqw;text-align:right;font-size:1.76cqw;line-height:1.36;color:#c4dcd8;max-width:46cqw}
+.sheet .band .sup b{font-size:2.52cqw;display:block;color:#fff;margin-bottom:.4cqw;line-height:1.2}
+.sheet .gold{position:absolute;left:7.62cqw;right:7.62cqw;top:27.62cqw;height:.67cqw;background:var(--inv-gold)}
+.sheet .bill{position:absolute;left:11.43cqw;top:33.3cqw;font-size:1.76cqw;color:#627074;line-height:1.52}
+.sheet .bill b{display:block;font-size:2.35cqw;color:#182024;margin:1cqw 0 .6cqw}
+.sheet .dets{position:absolute;left:57.14cqw;width:31.43cqw;top:31.43cqw;height:18.1cqw;background:var(--inv-tint);border-left:.57cqw solid var(--inv-dark);padding:0 2.4cqw 0 2.3cqw;display:grid;align-content:center}
+.sheet .dets div{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:1.85cqw;padding:1.15cqw 0;border-bottom:.1cqw solid #dae2e1}
+.sheet .dets div:last-child{border-bottom:0}
+.sheet table{position:absolute;left:11.43cqw;top:54.3cqw;width:77.14cqw;border-collapse:collapse;font-size:1.85cqw}
+.sheet th{background:var(--inv-dark);color:#fff;font-size:1.43cqw;text-align:left;padding:1.3cqw 1.43cqw;letter-spacing:.02em}
+.sheet td{padding:1.5cqw 1.43cqw;vertical-align:top;border-bottom:.12cqw solid #dae2e1;line-height:1.4}
+.sheet tbody tr:nth-child(even) td{background:#f8fbfa}
+.sheet td.n{color:#627074;font-size:1.68cqw}
 .sheet .r{text-align:right}
-.sheet td.a,.sheet th.a{background:var(--inv-col);padding-right:1cqw;padding-left:1.4cqw;font-weight:700;border-bottom:0}
-.sheet th.a{background:none;border-bottom:.17cqw solid #111}
-.sheet .foot{position:absolute;left:7.6cqw;right:7.6cqw;bottom:7.6cqw;height:21cqw;display:grid;grid-template-columns:117fr 61fr;color:#fff}
-.sheet .foot .l{background:var(--inv-blue);padding:3cqw 4.8cqw 2.6cqw;font-size:1.85cqw;line-height:1.35;display:flex;flex-direction:column;justify-content:space-between}
-.sheet .foot .g{background:var(--inv-grey);padding:3cqw 4.8cqw;text-align:right}
-.sheet .foot .g b{display:block;font-size:4.7cqw;margin-top:2cqw}
-.sheet .more{font-style:italic;color:#666}
+.sheet td.a{font-weight:700}
+.sheet .foot{position:absolute;left:7.62cqw;right:7.62cqw;bottom:7.62cqw;height:21.9cqw;display:grid;grid-template-columns:108fr 70fr}
+.sheet .foot .l{background:var(--inv-tint);padding:2.9cqw 3.81cqw 2.4cqw;display:flex;flex-direction:column;gap:1.4cqw;font-size:1.76cqw}
+.sheet .foot .kv{display:grid;grid-template-columns:15.7cqw 1fr;row-gap:.9cqw;color:#627074}
+.sheet .foot .kv b{color:#182024}
+.sheet .foot .note{margin-top:auto;color:#627074;font-size:1.6cqw}
+.sheet .foot .g{background:var(--inv-dark);color:#fff;padding:3.6cqw 3.81cqw;text-align:right}
+.sheet .foot .g .lbl{color:var(--inv-gold)}
+.sheet .foot .g b{display:block;font-size:4.7cqw;margin-top:1.8cqw;line-height:1.1}
+.sheet .foot .g .due{color:#c4dcd8;font-size:1.68cqw;margin-top:1.4cqw}
+.sheet .more{font-style:italic;color:#8a9699}
 
 .fixed{gap:0}
 .fixed summary{display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;list-style:none}
@@ -140,7 +147,7 @@ img{max-width:100%}
         <div class="items" id="items"></div>
         <button type="button" id="addItem">+ Add another line</button>
         <div class="totalRow"><span>Total</span><b id="total">£0.00</b></div>
-        <label class="f">Explanation <span class="hint" style="font-weight:400">(optional)</span><textarea id="explain" rows="2" placeholder="Anything Safar should know about this invoice. Leave blank for N/A."></textarea></label>
+        <label class="f">Notes <span class="hint" style="font-weight:400">(optional)</span><textarea id="explain" rows="2" placeholder="Anything Safar should know about this invoice. Leave blank for N/A."></textarea></label>
       </section>
 
       <details class="panel fixed" id="fixedBox">
@@ -241,84 +248,94 @@ const pct=v=>num(v).toFixed(2)+"%";
 function preview(){
   $("fixedName").textContent=S.supName||"Invoice from & bank details";
   $("fixedSub").textContent=(S.accNo&&S.sortCode)?`Account ${S.accNo} · sort code ${S.sortCode}`:"Add your bank details";
-  const its=S.items; const show=its.slice(0,8);
+  const its=S.items; const show=its.slice(0,7);
   const addr=(S.supAddr||"").split("\n").map(s=>s.trim()).filter(Boolean);
   $("sheet").innerHTML=`
-    <div class="band"><div class="t">Invoice</div><div class="sup"><b>${esc(S.supName||"Your name or company")}</b>${addr.map(esc).join("<br>")}</div></div>
-    <div class="meta">
-      <div class="bill"><div class="lbl">BILL TO:</div><b>${BILL.name}</b>${BILL.lines.map(l=>`<div>${l}</div>`).join("")}</div>
-      <div class="right"><div class="lbl">INVOICE #</div><div class="v">${esc(S.invNo||"—")}</div><div class="lbl">DATE</div><div class="v">${uk(S.invDate)||"—"}</div><div class="lbl">INVOICE DUE DATE</div><div class="v">${uk(S.dueDate)||"—"}</div></div>
+    <div class="band"><div class="tt"><div class="t">Invoice</div><div class="no">INVOICE NO. ${esc(S.invNo||"—")}</div></div>
+      <div class="sup"><b>${esc(S.supName||"Your name or company")}</b>${addr.map(esc).join("<br>")}</div></div>
+    <div class="gold"></div>
+    <div class="bill"><div class="lbl">BILL TO</div><b>${BILL.name}</b>${BILL.lines.map(l=>`<div>${l}</div>`).join("")}</div>
+    <div class="dets">
+      <div><span class="lbl">INVOICE NO.</span><span>${esc(S.invNo||"—")}</span></div>
+      <div><span class="lbl">INVOICE DATE</span><span>${uk(S.invDate)||"—"}</span></div>
+      <div><span class="lbl">DUE DATE</span><span>${uk(S.dueDate)||"—"}</span></div>
     </div>
-    <table><thead><tr><th style="width:13%">ITEMS</th><th>DESCRIPTION</th><th class="r" style="width:12%">PRICE</th><th class="r a" style="width:14%">AMOUNT</th></tr></thead>
-    <tbody>${show.map((it,i)=>`<tr><td>Item ${i+1}</td><td>${esc(it.desc)||'<span class="more">Description</span>'}</td><td class="r">${gbp(num(it.price))}</td><td class="r a">${gbp(amount(it))}</td></tr>`).join("")}
-    ${its.length>show.length?`<tr><td></td><td class="more">+ ${its.length-show.length} more line${its.length-show.length>1?"s":""} in the PDF</td><td></td><td class="a"></td></tr>`:""}
-    ${its.length?"":`<tr><td></td><td class="more">Your lines appear here</td><td></td><td class="a"></td></tr>`}</tbody></table>
-    <div class="foot"><div class="l"><div><div class="lbl">EXPLANATION</div><div>${esc(S.explain.trim()||"N/A")}</div></div>
-      <div>Account Name: ${esc(S.accName)}<br>Account Number: ${esc(S.accNo)}<br>Sort Code: ${esc(S.sortCode)}</div></div>
-      <div class="g"><div class="lbl">TOTAL TODAY</div><b>${gbp(total())}</b></div></div>`;
+    <table><thead><tr><th style="width:13%">ITEM</th><th>DESCRIPTION</th><th class="r" style="width:13%">PRICE</th><th class="r" style="width:15%">AMOUNT</th></tr></thead>
+    <tbody>${show.map((it,i)=>`<tr><td class="n">Item ${i+1}</td><td>${esc(it.desc)||'<span class="more">Description</span>'}</td><td class="r">${gbp(num(it.price))}</td><td class="r a">${gbp(amount(it))}</td></tr>`).join("")}
+    ${its.length>show.length?`<tr><td></td><td class="more">+ ${its.length-show.length} more line${its.length-show.length>1?"s":""} in the PDF</td><td></td><td></td></tr>`:""}</tbody></table>
+    <div class="foot"><div class="l"><div class="lbl">PAYMENT DETAILS</div>
+      <div class="kv"><span>Account name</span><b>${esc(S.accName)}</b><span>Account number</span><b>${esc(S.accNo)}</b><span>Sort code</span><b>${esc(S.sortCode)}</b></div>
+      <div class="note">Notes: ${esc(S.explain.trim()||"N/A")}</div></div>
+      <div class="g"><div class="lbl">TOTAL DUE</div><b>${gbp(total())}</b><div class="due">Due by ${uk(S.dueDate)||"—"}</div></div></div>`;
 }
 
 /* PDF */
 function buildPdf(){
   const { jsPDF }=window.jspdf;
   const doc=new jsPDF({unit:"mm",format:"a4",compress:true});
-  const W=210,H=297,L=16,R=194,IL=26,IR=184;
-  const BLUE=[39,70,127],GREY=[103,103,103],COL=[242,242,242],INK=[17,17,17],SOFT=[96,96,96],RULE=[222,222,222];
+  const W=210,H=297,L=16,R=194,IL=24,IR=186;
+  const TEAL=[16,57,59],GOLD=[201,160,72],TINT=[236,243,242],INK=[24,32,36],MUTED=[98,112,116],RULE=[218,226,225],PALE=[196,220,216];
   const font=(s,b)=>{ doc.setFont("helvetica",b?"bold":"normal"); doc.setFontSize(s); };
+  const col=c=>doc.setTextColor(...c);
   const its=filled();
   const addr=(S.supAddr||"").split("\n").map(s=>s.trim()).filter(Boolean);
-  const FOOT_H=44, FOOT_TOP=H-16-FOOT_H;
+  const FOOT_H=46, FOOT_TOP=H-16-FOOT_H;
 
-  // header band
-  doc.setFillColor(...BLUE); doc.rect(L,16,R-L,45,"F");
-  doc.setTextColor(255,255,255); font(42,false); doc.text("Invoice",IL,50);
-  font(15,true); let sy=30;
-  doc.splitTextToSize(S.supName,92).forEach(l=>{ doc.text(l,IR,sy,{align:"right"}); sy+=6.2; });
-  font(11,false); addr.forEach(l=>{ doc.text(l,IR,sy,{align:"right"}); sy+=5; });
+  // header band + gold rule
+  doc.setFillColor(...TEAL); doc.rect(L,16,R-L,42,"F");
+  doc.setFillColor(...GOLD); doc.rect(L,58,R-L,1.4,"F");
+  col([255,255,255]); font(40,false); doc.text("Invoice",IL,43);
+  col(GOLD); font(10,true); doc.text(`INVOICE NO. ${S.invNo}`,IL,51);
+  col([255,255,255]); font(15,true); let sy=29;
+  doc.splitTextToSize(S.supName,90).forEach(l=>{ doc.text(l,IR,sy,{align:"right"}); sy+=6.2; });
+  col(PALE); font(10.5,false); addr.forEach(l=>{ doc.text(l,IR,sy,{align:"right"}); sy+=5; });
 
-  // bill to + invoice details
-  doc.setTextColor(...INK);
-  font(9,true); doc.text("BILL TO:",IL,72);
-  font(15,true); doc.text(BILL.name,IL,79.5);
-  font(11,false); let by=86.5; BILL.lines.forEach(l=>{ doc.text(l,IL,by); by+=6.3; });
-  const meta=[["INVOICE #",S.invNo],["DATE",uk(S.invDate)],["INVOICE DUE DATE",uk(S.dueDate)]];
-  let my=72; meta.forEach(([k,v])=>{ font(9,true); doc.setTextColor(...INK); doc.text(k,IR,my,{align:"right"}); font(11.5,false); doc.text(String(v||""),IR,my+6.2,{align:"right"}); my+=14; });
+  // bill to
+  col(TEAL); font(8.5,true); doc.text("BILL TO",IL,73);
+  col(INK); font(14,true); doc.text(BILL.name,IL,80);
+  col(MUTED); font(10.5,false); let by=86.5; BILL.lines.forEach(l=>{ doc.text(l,IL,by); by+=5.6; });
+
+  // invoice details box
+  doc.setFillColor(...TINT); doc.rect(120,66,IR-120,38,"F");
+  doc.setFillColor(...TEAL); doc.rect(120,66,1.2,38,"F");
+  [["INVOICE NO.",S.invNo],["INVOICE DATE",uk(S.invDate)],["DUE DATE",uk(S.dueDate)]].forEach(([k,v],i)=>{
+    const yy=77+i*11; col(TEAL); font(8.5,true); doc.text(k,126,yy); col(INK); font(11,true); doc.text(String(v||""),IR-5,yy,{align:"right"});
+    if(i<2){ doc.setDrawColor(...RULE); doc.setLineWidth(0.2); doc.line(126,yy+4.5,IR-5,yy+4.5); } });
 
   // items table
-  const X={item:IL,desc:46,price:156,amt:IR}, colL=164, colR=186;
-  const header=y=>{ font(9,true); doc.setTextColor(...INK);
-    doc.text("ITEMS",X.item,y); doc.text("DESCRIPTION",X.desc,y); doc.text("PRICE",X.price,y,{align:"right"}); doc.text("AMOUNT",X.amt,y,{align:"right"});
-    doc.setDrawColor(...INK); doc.setLineWidth(0.35); doc.line(IL,y+3,IR,y+3); return y+4; };
+  const X={item:IL+3,desc:46,price:157,amt:IR-3};
+  const header=y=>{ doc.setFillColor(...TEAL); doc.rect(IL,y,IR-IL,9,"F"); col([255,255,255]); font(8.5,true);
+    doc.text("ITEM",X.item,y+6); doc.text("DESCRIPTION",X.desc,y+6); doc.text("PRICE",X.price,y+6,{align:"right"}); doc.text("AMOUNT",X.amt,y+6,{align:"right"}); return y+9; };
   const LH=11*0.3528*1.4;
-  const rows=its.map((it,i)=>{ font(11,false); const d=doc.splitTextToSize(it.desc||"",92); return {it,i,d,h:Math.max(11,LH*d.length+5.6)}; });
+  const rows=its.map((it,i)=>{ font(11,false); const d=doc.splitTextToSize(it.desc||"",88); return {it,i,d,h:Math.max(11.5,LH*d.length+6)}; });
   const limit=FOOT_TOP-8;
-  let y=header(124);
-  rows.forEach(r=>{ if(y+r.h>limit){ doc.addPage(); y=header(26); } r.y=y; r.page=doc.getNumberOfPages(); y+=r.h; });
-  const pages={}; rows.forEach(r=>{ (pages[r.page]=pages[r.page]||[]).push(r); });
-  Object.keys(pages).forEach(p=>{
-    doc.setPage(+p); const rs=pages[p]; const last=rs[rs.length-1];
-    doc.setFillColor(...COL); doc.rect(colL,rs[0].y-0.6,colR-colL,last.y+last.h-rs[0].y+3,"F");
-    rs.forEach((r,k)=>{ const ty=r.y+7; font(11,false); doc.setTextColor(...INK);
-      doc.setTextColor(...SOFT); doc.text(`Item ${r.i+1}`,X.item,ty); doc.setTextColor(...INK);
-      doc.text(r.d,X.desc,ty,{lineHeightFactor:1.4});
-      doc.text(gbp(num(r.it.price)),X.price,ty,{align:"right"});
-      font(11,true); doc.text(gbp(amount(r.it)),X.amt,ty,{align:"right"});
-      if(k<rs.length-1){ doc.setDrawColor(...RULE); doc.setLineWidth(0.2); doc.line(IL,r.y+r.h,colL-2,r.y+r.h); } });
+  let y=header(114);
+  rows.forEach((r,k)=>{
+    if(y+r.h>limit){ doc.addPage(); y=header(24); }
+    if(k%2===1){ doc.setFillColor(248,251,250); doc.rect(IL,y,IR-IL,r.h,"F"); }
+    const ty=y+7.3;
+    col(MUTED); font(10,false); doc.text(`Item ${r.i+1}`,X.item,ty);
+    col(INK); font(11,false); doc.text(r.d,X.desc,ty,{lineHeightFactor:1.4});
+    doc.text(gbp(num(r.it.price)),X.price,ty,{align:"right"});
+    font(11,true); doc.text(gbp(amount(r.it)),X.amt,ty,{align:"right"});
+    doc.setDrawColor(...RULE); doc.setLineWidth(0.25); doc.line(IL,y+r.h,IR,y+r.h);
+    y+=r.h;
   });
-  doc.setPage(doc.getNumberOfPages());
 
-  // footer, pinned to the bottom of the last page
+  // footer on the last page
   const top=FOOT_TOP;
-  doc.setFillColor(...BLUE); doc.rect(L,top,133-L,FOOT_H,"F");
-  doc.setFillColor(...GREY); doc.rect(133,top,R-133,FOOT_H,"F");
-  doc.setTextColor(255,255,255);
-  font(9,true); doc.text("EXPLANATION",IL,top+9);
-  font(11,false); doc.text(doc.splitTextToSize(S.explain.trim()||"N/A",98).slice(0,2),IL,top+15,{lineHeightFactor:1.3});
-  font(11,false); doc.text([`Account Name: ${S.accName}`,`Account Number: ${S.accNo}`,`Sort Code: ${S.sortCode}`],IL,top+FOOT_H-17,{lineHeightFactor:1.35});
-  font(9,true); doc.text("TOTAL TODAY",IR,top+9,{align:"right"});
-  font(28,true); doc.text(gbp(total()),IR,top+24,{align:"right"});
+  doc.setFillColor(...TINT); doc.rect(L,top,124-L,FOOT_H,"F");
+  doc.setFillColor(...TEAL); doc.rect(124,top,R-124,FOOT_H,"F");
+  col(TEAL); font(8.5,true); doc.text("PAYMENT DETAILS",IL,top+9);
+  [["Account name",S.accName],["Account number",S.accNo],["Sort code",S.sortCode]].forEach(([k,v],i)=>{
+    const yy=top+17+i*6.4; col(MUTED); font(10.5,false); doc.text(k,IL,yy); col(INK); font(10.5,true); doc.text(String(v||""),IL+33,yy); });
+  col(MUTED); font(9.5,false);
+  doc.text(doc.splitTextToSize("Notes: "+(S.explain.trim()||"N/A"),96).slice(0,2),IL,top+FOOT_H-6.5,{lineHeightFactor:1.25,baseline:"bottom"});
+  col(GOLD); font(9,true); doc.text("TOTAL DUE",IR,top+11,{align:"right"});
+  col([255,255,255]); font(28,true); doc.text(gbp(total()),IR,top+26,{align:"right"});
+  col(PALE); font(10,false); doc.text(`Due by ${uk(S.dueDate)}`,IR,top+35,{align:"right"});
 
-  const n=doc.getNumberOfPages(); if(n>1){ for(let i=1;i<=n;i++){ doc.setPage(i); font(8.5,false); doc.setTextColor(120,120,120); doc.text(`Invoice ${S.invNo} · page ${i} of ${n}`,IR,H-8,{align:"right"}); } }
+  const n=doc.getNumberOfPages(); if(n>1){ for(let i=1;i<=n;i++){ doc.setPage(i); font(8.5,false); col([120,120,120]); doc.text(`Invoice ${S.invNo} · page ${i} of ${n}`,IR,H-8,{align:"right"}); } }
   return doc;
 }
 
